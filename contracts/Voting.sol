@@ -20,7 +20,6 @@ contract Election {
     struct Voter {
         uint256 id;
         string name;
-        string email;
     }
 
     mapping(uint256 => Candidate) candidates;
