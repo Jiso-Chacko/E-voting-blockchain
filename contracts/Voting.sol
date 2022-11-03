@@ -18,11 +18,13 @@ contract Election {
     State public electionState;
 
     struct Voter {
-        uint256 id;
+        address id;
         string name;
     }
 
     mapping(uint256 => Candidate) candidates;
+    // New mapping for the voters.
+    mapping(uint256 => Voter) voterDetails;
     mapping(address => bool) voted;
 
     mapping(address => bool) isVoter;
@@ -73,6 +75,7 @@ contract Election {
 
         isVoter[_voter] = true;
         // Voter[email] = email;
+        // voterDetails[_voter] = Voter(_voter, _email);
     }
 
     function getRole(address _current) public view returns (uint256) {

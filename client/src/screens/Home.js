@@ -23,6 +23,7 @@ export default function Home() {
         deployedNetwork && deployedNetwork.address
       );
       setWeb3(web3);
+      console.log(accounts);
       setCurrentAccount(accounts[0]);
       setContract(instance);
       console.log("init");

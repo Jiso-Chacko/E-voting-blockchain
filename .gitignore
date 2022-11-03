@@ -168,4 +168,5 @@ blockchain/history
 yarn.lock
 package-lock.json
 
-# End of https://www.toptal.com/developers/gitignore/api/solidity,soliditytruffle,react
+# End of https://www.toptal.com/developers/gitignore/api/solidity,soliditytruffle,reactsendgrid.env
+sendgrid.env
