@@ -4,7 +4,7 @@ const apiUrlLocal = 'http://localhost:5001/api/'
 
 const apiClient = axios.create({
     baseURL: apiUrlLocal,
-    timeout: 1000,
+    timeout: 1000 * 5,
     headers: {
         Accept: "*/*",
         "Access-Control-Allow-Origin": "*",

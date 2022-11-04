@@ -33,7 +33,7 @@ const body = `<body>
 exports.sendEmail = async (req,res) => {
     try{
         const msg = {
-            to: req.body.email, // Change to your recipient
+            to: `${req.body.toAddress}`, // Change to your recipient
             from: 'jisochacko007@gmail.com', // Change to your verified sender
             subject: 'Welcome to E-Voting!',
             html: `<body>
@@ -47,7 +47,7 @@ exports.sendEmail = async (req,res) => {
                     <P style="text-align: center;">We are excited to have you.</P>
                     <p>Your login credentials for E-Voting are listed below.</p>
                     <div style="background-color:#f2f2f2;padding: 15px 15px;margin-bottom: 30px;">
-                        <p style=" margin: 3px;font-weight: bold;padding-bottom: 10px;"><span>EMAIL: </span>${req.body.email}</p>
+                        <p style=" margin: 3px;font-weight: bold;padding-bottom: 10px;"><span>EMAIL: </span>${req.body.toAddress}</p>
                          <p style=" margin: 3px;font-weight: bold;padding-bottom: 10px;"><span>WALLET ID: </span>Your wallet ID</p>
                         <p style=" margin: 3px;font-weight: bold;padding-bottom: 10px;"style=" margin: 3px;font-weight: bold;padding-bottom: 10px;"><span>PASSWORD: </span>${req.body.password}</p>
                     </div>
