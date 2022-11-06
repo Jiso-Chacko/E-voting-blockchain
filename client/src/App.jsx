@@ -7,6 +7,7 @@ import CoverPage from "./screens/CoverPage";
 import UserLogin from "./screens/UserLogin";
 import { AuthProvider } from "./Context/AuthContext";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Otp from "./screens/Otp";
 
 const darkTheme = createTheme({
   palette: {
@@ -33,6 +34,7 @@ function App() {
             <Route path="/userLogin" element={<UserLogin />} />
             <Route path="/home" element={<Home />} />
             <Route path="/adminLogin" element={<AdminLogin />} />
+            <Route path="/otp" element={<Otp />} />
           </Routes>
         </AuthProvider>
       </div>

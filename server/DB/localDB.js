@@ -1,4 +1,8 @@
 
 const voter = [];
+const otp = []; 
 
-module.exports = voter;
+module.exports = {
+    voter,
+    otp
+};

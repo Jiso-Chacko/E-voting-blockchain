@@ -39,7 +39,11 @@ const UserLogin = () => {
       console.log("filterVoters", filterVoters);
       if (filterVoters.length > 0) {
         if (password == filterVoters[0].password) {
-          navigate("/Home");
+          const sendOtp = await apiClient.post("/sendOtp", {
+            email: filterVoters[0].email,
+          });
+          console.log("sendOtp", sendOtp);
+          navigate("/otp");
         } else {
           alert("Please enter correct password!");
         }
@@ -187,7 +191,7 @@ const UserLogin = () => {
               }}
               type="submit"
             >
-              Login
+              Submit
             </Button>
           </form>
         </Card>
