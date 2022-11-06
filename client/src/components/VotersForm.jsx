@@ -30,6 +30,10 @@ export default function VotersForm({ contract, web3, currentAccount }) {
     formState: { errors },
   } = useForm();
 
+  console.log("====================================");
+  console.log(voters);
+  console.log("====================================");
+
   const onSubmit = async (data) => {
     const { voteraddress, email } = data;
     try {
@@ -43,11 +47,6 @@ export default function VotersForm({ contract, web3, currentAccount }) {
         address: voteraddress,
         password: password,
       });
-
-      console.log("====================================");
-      console.log("sendEmail", sendEmail);
-      console.log("====================================");
-
       console.log("voter added");
     } catch (error) {
       console.log(error);
