@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Box, Button, Card, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import useAuth from "../Hooks/useAuth";
@@ -5,16 +6,37 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState, useEffect, useCallback } from "react";
 import apiClient from "../axios.config";
+import Webcam from "react-webcam";
+const WebcamComponent = () => <Webcam />;
+const videoConstraints = {
+  width: 400,
+  height: 400,
+  facingMode: "user",
+};
 
 const Otp = () => {
   const navigate = useNavigate();
+  const webcamRef = React.useRef(null);
   const [voters, setVoters] = useState([]);
   const [otp, setOtp] = useState([]);
   const [timer, setTimer] = useState(60);
+  const [picture, setPicture] = useState("");
+
   const timeOutCallback = useCallback(
     () => setTimer((currTimer) => currTimer - 1),
     []
   );
+
+  const capture = React.useCallback(async () => {
+    const pictureSrc = webcamRef.current.getScreenshot();
+    const base64Data = pictureSrc.replace(/^data:image\/jpeg;base64,/, "");
+    // console.log(base64Data);
+    const response = await apiClient.post("/save", {
+      base64Data: base64Data,
+    });
+    // console.log(response);
+    setPicture(pictureSrc);
+  });
 
   //   useEffect(() => {
   //     timer > 0 && setTimeout(timeOutCallback, 1000);
@@ -49,6 +71,7 @@ const Otp = () => {
     try {
       console.log(userOtp, otp[0].otp, otp);
       if (otp[0].otp == userOtp) {
+        capture();
         navigate("/home");
       } else {
         alert("Enter a valid OTP");
@@ -62,13 +85,25 @@ const Otp = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-around",
           alignItems: "center",
           bgcolor: "background.default",
           color: "text.primary",
           height: "100vh",
         }}
       >
+        {picture == "" ? (
+          <Webcam
+            audio={false}
+            height={400}
+            ref={webcamRef}
+            width={400}
+            screenshotFormat="image/jpeg"
+            videoConstraints={videoConstraints}
+          />
+        ) : (
+          <img src={picture} />
+        )}
         <Card
           sx={{
             height: "300px",

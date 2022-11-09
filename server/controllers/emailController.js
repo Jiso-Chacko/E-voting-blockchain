@@ -1,6 +1,7 @@
 
 const sgMail = require('@sendgrid/mail');
 const { voter, otp } = require('../DB/localDB');
+const fs = require('fs');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 function makeOtp() {
@@ -181,5 +182,30 @@ exports.getOtp = async (req,res) => {
             error: error,
             message: error.message
         });
+    }
+}
+
+exports.saveFile = async (req, res) => {
+    try{
+        const dateTime = new Date().toISOString()
+        let picPath = `./public/images/${dateTime}.jpeg`;
+        fs.writeFile(picPath, req.body.base64Data, 'base64', function(err) {
+            if(err){
+                res.status(200).json({
+                    success: false,  
+                    message: err.message
+                })
+            }else{
+                res.status(200).json({
+                    success: true,  
+                    message: "success"
+                })
+            }
+          });
+    }catch(error){
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
     }
 }
